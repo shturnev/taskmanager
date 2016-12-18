@@ -23,6 +23,11 @@ class DB
     }
 
 
+    /**
+     * Соединиться с БД
+     * @return bool
+     * @throws \Exception
+     */
     private function connect()
     {
         if($this->db_connect instanceof \mysqli && $this->db_connect->ping())
@@ -41,6 +46,9 @@ class DB
         $this->db_connect = $resConnect;
     }
 
+    /**
+     * Закрыть соединение с БД
+     */
     private function disconnect()
     {
         if($this->db_connect instanceof \mysqli && $this->db_connect->ping())
@@ -51,6 +59,7 @@ class DB
 
 
     /**
+     * Сделать запись в бд
      * @param $tableName - название для таблицы
      * @param $arrValues - массив с данными для записи [key (это название поля в таблице) => value]
      * @param bool|false $close - Закрывать ли соединение с бд
@@ -77,8 +86,127 @@ class DB
     }
 
 
+    /**
+     * Удалить запись из БД
+     * @param $table - название для таблицы
+     * @param $where - условие where
+     * @param bool|false $close  - Закрывать ли соединение с бд
+     * @return $this
+     * @throws \Exception
+     */
+    public function delete($table, $where, $close = false)
+    {
+        $this->connect();
 
-    //insert
+        $sql = "DELETE FROM ".$table." WHERE ".$where;
+
+        $resQuery = $this->db_connect->query($sql);
+        if(!$resQuery){
+            throw new \Exception($this->db_connect->error);
+        }
+
+        if($close){
+            $this->disconnect();
+        }
+
+        return $this;
+
+    }
+
+
+    /**
+     * @param $tableName - название для таблицы
+     * @param $arrValues - массив с данными для записи [key (это название поля в таблице) => value]
+     * @param $where - условие where
+     * @param bool|false $close - Закрывать ли соединение с бд
+     * @return $this
+     * @throws \Exception
+     */
+    public function update($tableName, $arrValues, $where, $close = false)
+    {
+        $this->connect();
+
+        $forSql = [];
+        foreach ($arrValues as $key => $value) {
+            $forSql[] = $key."='".$value."'";
+        }
+
+        $sql = "UPDATE ".$tableName." SET ".implode(",", $forSql)." WHERE ".$where;
+
+        $resQuery = $this->db_connect->query($sql);
+        if(!$resQuery){
+            throw new \Exception($this->db_connect->error);
+        }
+
+        if($close){
+            $this->disconnect();
+        }
+
+        return $this;
+    }
+
+
+    /**
+     * Выборка одной строки из таблицы
+     * @param $sql - sql запрос
+     * @param bool|false $close
+     * @return bool
+     * @throws \Exception
+     */
+    public function get_row($sql, $close = false)
+    {
+        $this->connect();
+
+        $resQuery = $this->db_connect->query($sql);
+        if(!$resQuery){
+            throw new \Exception($this->db_connect->error);
+        }
+
+        if($resQuery->num_rows > 0)
+        {
+            $result = $resQuery->fetch_assoc();
+            if($close){ $this->disconnect(); }
+            return $result;
+        }
+        else{
+            if($close){ $this->disconnect(); }
+            return false;
+        }
+
+    }
+
+    /**
+     * Выборка нескольких строки из таблицы
+     * @param $sql - sql запрос
+     * @param bool|false $close
+     * @return bool
+     * @throws \Exception
+     */
+    public function get_rows($sql, $close = false)
+    {
+        $this->connect();
+
+        $resQuery = $this->db_connect->query($sql);
+        if(!$resQuery){
+            throw new \Exception($this->db_connect->error);
+        }
+
+        if($resQuery->num_rows > 0)
+        {
+            $result = $resQuery->fetch_all(MYSQLI_ASSOC);
+            if($close){ $this->disconnect(); }
+            return $result;
+        }
+        else{
+            if($close){ $this->disconnect(); }
+            return false;
+        }
+
+    }
+
+
+
+
     //update, delete, get_row, get_rows
 
 }
