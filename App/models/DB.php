@@ -78,11 +78,13 @@ class DB
             throw new \Exception($this->db_connect->error);
         }
 
+        $insert_id = $this->db_connect->insert_id;
+
         if($close){
             $this->disconnect();
         }
 
-        return $this;
+        return $insert_id;
     }
 
 
