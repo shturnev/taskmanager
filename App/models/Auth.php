@@ -8,7 +8,12 @@ class Auth
 
     private  $timeToDestroy = "1 month";
 
-
+    /**
+     * Общий метод регистрации и авторизации
+     * @param $array
+     * @return array
+     * @throws \Exception
+     */
     public function enter($array)
     {
         $email = strtolower(trim($_POST["email"]));
@@ -38,6 +43,12 @@ class Auth
     }
 
 
+    /**
+     * Создаёт куки для авторизованного пользователя
+     * @param $user_id
+     * @param $token
+     * @return array
+     */
     public function setAuth($user_id, $token)
     {
         if(!$token){ $token = md5(time().rand()); }
@@ -52,7 +63,13 @@ class Auth
 
     }
 
-
+    /**
+     * Метод регистрации
+     * @param $email
+     * @param $pass
+     * @return array
+     * @throws \Exception
+     */
     public function register($email, $pass)
     {
         //1. делаем запись в базу
@@ -90,5 +107,50 @@ class Auth
         return $res;
 
     }
+
+    /**
+     * Подтвердить email
+     * @param $token
+     * @return array
+     * @throws \Exception
+     */
+    public function confirm_email($token)
+    {
+        if(!$token){
+            throw new \Exception("Не верный параметр - token"); }
+
+        $token = TextSecurity::shield_hard($token);
+
+        $DB = new DB();
+        $resDb = $DB->get_row("SELECT * FROM users WHERE token = '".$token."'");
+        if(!$resDb){
+            throw new \Exception("Такой token не найден");}
+
+        //2
+        if($resDb["confirm_email"] == 1){
+            throw new \Exception("Этот token уже был использован");}
+
+        //3
+        $arr = [
+            "token" => $this->newToken(),
+            "confirm_email" => 1
+        ];
+
+        $resUpd = $DB->update("users", $arr, "ID = ".$resDb["ID"]);
+
+        //4
+        return $this->setAuth($resDb["ID"], $arr["token"]);
+
+
+    }
+
+
+
+
+    private function newToken()
+    {
+        return md5(time().rand());
+    }
+
 
 }
