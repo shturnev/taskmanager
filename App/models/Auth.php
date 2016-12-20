@@ -14,7 +14,7 @@ class Auth
         $email = strtolower(trim($_POST["email"]));
         $pass  = $_POST["pass"];
 
-        if(!$email || !$pass){ throw new \Exception("E-mail и пароль должный быть заполненны"); }
+        if(!$email || !$pass){ throw new \Exception("E-mail и пароль должны быть заполнены"); }
         if(!TextSecurity::is_email($email)){ throw new \Exception("Не коректный e-mail"); }
 
         //проверим есть ли такой пользователь в БД
@@ -63,7 +63,7 @@ class Auth
         $resInsert = $DB->insert("users", $arr, true);
 
         //2. отправим письмо
-        
+
 
 
     }
