@@ -26,7 +26,9 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-4 col-md-offset-4">
-            <form class="form-signin mg-btm">
+            <form action="" method="post" enctype="multipart/form-data" class="form-signin mg-btm">
+                <input type="hidden" name="method_name" value="enter">
+
                 <h3 class="heading-desc text-center">
 <!--                    <button type="button" class="close pull-right" aria-hidden="true">×</button>-->
                    Welcome to the best task manager!
@@ -49,8 +51,8 @@
                 </div>
                 <div class="main">
 
-                    <input type="text" class="form-control" placeholder="Email" autofocus>
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input type="text" name="email" class="form-control" placeholder="Email" autofocus>
+                    <input type="password" name="pass" class="form-control" placeholder="Password">
 
 <!--                    Are you a business? <a href=""> Get started here</a>-->
                     <span class="clearfix"></span>
