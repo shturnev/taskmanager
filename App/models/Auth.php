@@ -32,7 +32,7 @@ class Auth
 
         //Сверим данные
         //1. подтвердил ли пользователь свой email?
-        if(!$resUser["confirm_email"]){ throw new \Exception("Ожидается подтверждения e-mail"); }
+        if(!$resUser["confirm_email"]){ throw new \Exception("Ожидается подтверждение регистрации"); }
 
         //2. Авторизуем, если пароль указан верно
         if(!password_verify($pass, $resUser["pass"])){ throw new \Exception("Не верный пароль"); }
@@ -51,7 +51,7 @@ class Auth
      */
     public function setAuth($user_id, $token)
     {
-        if(!$token){ $token = md5(time().rand()); }
+        if(!$token){ $token = $this->newToken(); }
 
         setcookie("user_id", $user_id, strtotime($this->timeToDestroy), "/");
         setcookie("token", $token, strtotime($this->timeToDestroy), "/");
@@ -77,7 +77,7 @@ class Auth
             "date"  => time(),
             "email" => $email,
             "pass"  => password_hash($pass, PASSWORD_DEFAULT),
-            "token" => md5(time().rand()),
+            "token" => $this->newToken(),
         ];
 
         $DB = new DB();

@@ -12,6 +12,9 @@ if($_POST["method_name"] == "enter")
     catch(Exception $e)
     {
         $error = ["error_text" => $e->getMessage()];
+        $inputs_val = $_POST;
+        include "App/views/login.php";
+        exit;
     }
 }
 
@@ -39,6 +42,7 @@ if($error)
 }
 else if($resAuth["type"] == "register")
 {
+    $succes = ["succes_text" => "Спасибо, проверьте свою почту, для завершения регистрации."];
     include "App/views/login.php";
 }
 else if($resAuth["type"] == "auth")

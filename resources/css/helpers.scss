@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+$opt: (
+  m: margin,
+  mt: margin-top,
+  mr: margin-right,
+  mb: margin-bottom,
+  ml: margin-left,
+  p: padding,
+  pt: padding-top,
+  pr: padding-right,
+  pb: padding-bottom,
+  pl: padding-left,
+);
+
+@each $key, $val in $opt{
+
+  $i:0; $s:5; $max: 500;
+
+  @while($i <= $max)
+  {
+    .#{$key}#{$i}{#{$val}: $i + px; }
+
+    $i: $i + $s;
+  }
+
+}

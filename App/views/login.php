@@ -22,6 +22,18 @@
 <!--                    <button type="button" class="close pull-right" aria-hidden="true">×</button>-->
                    Welcome to the best task manager!
                 </h3>
+
+                <? if($error){ ?>
+                <br><br>
+                <div class="alert alert-danger m20"><b>Ошибка!</b> <? echo $error["error_text"] ?></div>
+                <? } ?>
+
+                <? if($succes){ ?>
+                <br><br>
+                <div class="alert alert-success m20"><b>!</b> <? echo $succes["succes_text"] ?></div>
+                <? } ?>
+
+
                 <div class="social-box">
                     <div class="row mg-btm">
                         <div class="col-md-12">
@@ -40,8 +52,8 @@
                 </div>
                 <div class="main">
 
-                    <input type="text" name="email" class="form-control" placeholder="Email" autofocus>
-                    <input type="password" name="pass" class="form-control" placeholder="Password">
+                    <input type="text" value="<? echo $inputs_val["email"] ?>" name="email" class="form-control" placeholder="Email" autofocus>
+                    <input type="password" value="<? echo $inputs_val["pass"] ?>" name="pass" class="form-control" placeholder="Password">
 
 <!--                    Are you a business? <a href=""> Get started here</a>-->
                     <span class="clearfix"></span>
