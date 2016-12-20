@@ -44,6 +44,35 @@ class Auth
 
 
     /**
+     * Проверка авторизован ли пользователь
+     * @return bool
+     * @throws \Exception
+     */
+    public function check_auth()
+    {
+        if(!is_numeric($_COOKIE["user_id"]) || !$_COOKIE["token"]){ return false; }
+
+        $token = TextSecurity::shield_hard($_COOKIE["token"]);
+
+        $DB = new DB();
+        $resDb = $DB->get_row("SELECT * FROM users WHERE ID = ".$_COOKIE["user_id"]." AND token ='".$token."'");
+
+        if(!$resDb){ return false; }
+
+        return $resDb["ID"];
+    }
+
+    /**
+     * Де-авторизация
+     */
+    public function logout()
+    {
+        setcookie("user_id", '', strtotime("-1 day"), "/");
+        setcookie("token", '', strtotime("-1 day"), "/");
+    }
+
+
+    /**
      * Создаёт куки для авторизованного пользователя
      * @param $user_id
      * @param $token
