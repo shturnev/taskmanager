@@ -1,5 +1,4 @@
 <?php
-$Auth = new App\models\Auth();
 
 if(!$Auth->check_auth())
 {

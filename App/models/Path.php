@@ -44,6 +44,27 @@ class Path{
     }
 
 
+    public function parse()
+    {
+        $url_path  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $uri_parts = explode('/', trim($url_path, ' /'));
+        $uri_parts = array_filter($uri_parts);
 
+        if(count($uri_parts)){ $_GET["c"]       = array_shift($uri_parts); }
+        if(count($uri_parts)){ $_GET["method"]  = array_shift($uri_parts); }
+
+
+        if(count($uri_parts)){
+            for ($i = 0; $i < count($uri_parts); $i++):
+
+                $key = $uri_parts[$i];
+                if($val = $uri_parts[++$i]){
+                    $_GET[$key] = $val;
+                }
+
+            endfor;
+        }
+
+    }
 
 }

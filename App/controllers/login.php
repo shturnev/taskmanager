@@ -1,5 +1,4 @@
 <?php
-$Auth = new App\models\Auth();
 
 /*-----------------------------------
 В случае если была передана форма
@@ -22,15 +21,21 @@ if($_POST["method_name"] == "enter")
 /*-----------------------------------
 Если были переданы GET параметры
 -----------------------------------*/
-if($_GET["confirm_email"])
+if($_GET["method"])
 {
-    try{
-        $resAuth = $Auth->confirm_email($_GET["confirm_email"]);
-    }
-    catch(Exception $e)
-    {
-        $error = ["error_text" => $e->getMessage()];
-    }
+    switch ($_GET["method"]):
+        case "confirm_email":
+            try{
+                $resAuth = $Auth->confirm_email($_GET["code"]);
+            }
+            catch(Exception $e)
+            {
+                $error = ["error_text" => $e->getMessage()];
+            }
+
+        break;
+
+    endswitch;
 }
 
 /*-----------------------------------

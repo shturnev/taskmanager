@@ -174,8 +174,6 @@ class Auth
     }
 
 
-
-
     private function newToken()
     {
         return md5(time().rand());

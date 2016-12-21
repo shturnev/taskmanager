@@ -6,7 +6,7 @@
         
         <p>Для подтверждения регистрации необходимо перейти по ссылке:
 
-            <a href="{{clear_url}}?c=login&confirm_email={{token}}">{{clear_url}}?c=login&confirm_email={{token}}</a>
+            <a href="{{clear_url}}login/confirm_email/code/{{token}}">{{clear_url}}login/confirm_email/code/{{token}}</a>
         </p>
         
     </div>
