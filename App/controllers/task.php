@@ -6,8 +6,8 @@ if(!$Auth->check_auth())
 }
 else
 {
-//    $pageTitle = "Задачи";
-    include "App/views/main.php";
+    $pageTitle = "Задачи";
+    include "App/views/task.php";
 
 }
 
