@@ -41,7 +41,7 @@
 
     <div class="row">
         <div class="col-md-12 text-right mb35">
-            <a href="#" class="btn btn-primary btn-lg">Добавить задачу <span class="glyphicon glyphicon-plus-sign"></span></a>
+            <a href="/task/create" class="btn btn-primary btn-lg">Добавить задачу <span class="glyphicon glyphicon-plus-sign"></span></a>
         </div>
     </div><!--/.row-->
 

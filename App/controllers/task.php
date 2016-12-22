@@ -1,13 +1,59 @@
 <?php
+if(!$Auth->check_auth()){ include "App/views/tamplate.php"; exit;}
 
-if(!$Auth->check_auth())
+/*-----------------------------------
+Global
+-----------------------------------*/
+$Task       = new \App\models\Task();
+$referer    = ($_POST["referer"])? $_POST["referer"] : $_SERVER["HTTP_REFERER"];
+
+
+/*-----------------------------------
+POST
+-----------------------------------*/
+if($_POST["method_name"])
 {
-    include "App/views/tamplate.php";
+    switch ($_POST["method_name"]):
+        case "create":
+
+
+            try{
+                $resTask = $Task->create($_POST);
+                header("Location: ".$referer);
+
+            }
+            catch(Exception $e)
+            {
+                $error      = ["error_text" => $e->getMessage()];
+                $inputs_val = $_POST;
+                include "App/views/task/create.php";
+                exit;
+            }
+
+        break;
+
+    endswitch;
+}
+
+
+/*-----------------------------------
+GET
+-----------------------------------*/
+if($_GET["method"])
+{
+    switch ($_GET["method"]):
+        case "create":
+
+            $pageTitle = "Добавить задачу";
+            include "App/views/task/create.php";
+
+        break;
+
+    endswitch;
 }
 else
 {
     $pageTitle = "Задачи";
-    include "App/views/task.php";
-
+    include "App/views/task/task.php";
 }
 
