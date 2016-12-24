@@ -46,98 +46,90 @@
     </div><!--/.row-->
 
 
-
+    <? if($taskItems["items"]): ?>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Basic Table</div>
                 <div class="panel-body">
-                    <div class="bootstrap-table">
-                        <div class="fixed-table-toolbar"></div>
-                        <div class="fixed-table-container">
-                            <div class="fixed-table-header"><table></table></div>
-                            <div class="fixed-table-body">
-                                <div class="fixed-table-loading" style="top: 37px; display: none;">Loading, please wait…</div>
-                                <table data-toggle="table" class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-right">
-                                            <div class="th-inner ">Item ID</div>
-                                            <div class="fht-cell"></div>
-                                        </th>
-                                        <th style="">
-                                            <div class="th-inner ">Item Name</div>
-                                            <div class="fht-cell"></div>
-                                        </th>
-                                        <th style="">
-                                            <div class="th-inner ">Item Price</div>
-                                            <div class="fht-cell"></div>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr data-index="0">
-                                        <td style="text-align: right; ">0</td>
-                                        <td style="">Item 0</td>
-                                        <td style="">$0</td>
-                                    </tr>
-                                    <tr data-index="1">
-                                        <td style="text-align: right; ">1</td>
-                                        <td style="">Item 1</td>
-                                        <td style="">$1</td></tr>
-                                    <tr data-index="2">
-                                        <td style="text-align: right; ">2</td>
-                                        <td style="">Item 2</td>
-                                        <td style="">$2</td>
-                                    </tr>
-                                    <tr data-index="3">
-                                        <td style="text-align: right; ">3</td>
-                                        <td style="">Item 3</td>
-                                        <td style="">$3</td>
-                                    </tr>
-                                    <tr data-index="4">
-                                        <td style="text-align: right; ">4</td>
-                                        <td style="">Item 4</td>
-                                        <td style="">$4</td>
-                                    </tr>
-                                    <tr data-index="5">
-                                        <td style="text-align: right; ">5</td>
-                                        <td style="">Item 5</td>
-                                        <td style="">$5</td>
-                                    </tr>
-                                    <tr data-index="6">
-                                        <td style="text-align: right; ">6</td>
-                                        <td style="">Item 6</td>
-                                        <td style="">$6</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="fixed-table-pagination">
 
-                            </div>
+                    <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr class="active">
+                            <th class="text-right">
+                                <div class="th-inner ">ID</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner ">Title</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner ">Date of create</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner ">Date of deadleine</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner ">Date of finished</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th style="">
+                                <div class="th-inner ">Status</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                            <th class="text-center">
+                                <div class="th-inner ">Settings</div>
+                                <div class="fht-cell"></div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <? foreach ($taskItems["items"] as $item) { ?>
+                            <tr data-index="0">
+                                <td class="text-right"><? echo $item["ID"] ?></td>
+                                <td style=""> <a href="#"><? echo $item["title"] ?></a></td>
+                                <td style=""><? echo date("d.m.Y", $item["date_created"]) ?></td>
+                                <td style=""><? echo (!$item["date_deadline"])? "---" : date("d.m.Y", $item["date_deadline"]) ?></td>
+                                <td style=""><? echo (!$item["date_finished"])? "---" : date("d.m.Y", $item["date_finished"]) ?></td>
+                                <td style=""><? echo $item["status"] ?></td>
+                                <td class="text-center">
+
+                                    <a href="/task/complete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-ok-circle"></a>
+                                    <a href="/task/edit/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-edit"></a>
+                                    <a href="/task/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash"></a>
+                                    
+                                </td>
+                            </tr>
+                        <? } ?>
+                        </tbody>
+
+                    </table>
+
+                    <? if($taskItems["stack"]) {
+                       $paginationUrl   = $thisUrl."?p=";
+                       $stack           = $taskItems["stack"];
+
+                    ?>
+                    <div>
+                        <div class="pull-right">
+                            <? include "App/views/blocks/pagination.php"; ?>
                         </div>
-
-                        <div class="fixed-table-pagination">
-                            <div class="pull-right pagination">
-                                <ul class="pagination">
-                                    <li class="page-first disabled"><a href="javascript:void(0)">&lt;&lt;</a></li>
-                                    <li class="page-pre disabled"><a href="javascript:void(0)">&lt;</a></li>
-                                    <li class="page-number active disabled"><a href="javascript:void(0)">1</a></li>
-                                    <li class="page-number"><a href="javascript:void(0)">2</a></li>
-                                    <li class="page-number"><a href="javascript:void(0)">3</a></li>
-                                    <li class="page-next"><a href="javascript:void(0)">&gt;</a></li>
-                                    <li class="page-last"><a href="javascript:void(0)">&gt;&gt;</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
                     </div>
-                    <div class="clearfix"></div>
+                    <? } ?>
+
+
                 </div>
+
+
             </div>
         </div>
     </div>
+    <? endif; ?>
+</div>
 
 
 </div>	<!--/.main-->
