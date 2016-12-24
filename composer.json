@@ -1,6 +1,8 @@
 {
     "name": "sht_j/taskmanager",
-    "require": {},
+    "require": {
+        "abeautifulsite/simpleimage": "^2.6"
+    },
     "autoload": {
         "psr-4": { "App\\": "App/" }
     }

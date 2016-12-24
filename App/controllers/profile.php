@@ -4,7 +4,7 @@ if(!$Auth->check_auth()){ header("Location: /"); exit;}
 /*-----------------------------------
 Global
 -----------------------------------*/
-$Task       = new \App\models\Task();
+$Profile    = new \App\models\Profile();
 $referer    = ($_POST["referer"])? $_POST["referer"] : $_SERVER["HTTP_REFERER"];
 
 
@@ -14,11 +14,11 @@ POST
 if($_POST["method_name"])
 {
     switch ($_POST["method_name"]):
-        case "create":
+        case "edit_profile_info":
 
 
             try{
-                $resTask = $Task->create($_POST);
+                $resTask = $Profile->edit($_POST);
                 header("Location: ".$referer);
 
             }
@@ -26,7 +26,7 @@ if($_POST["method_name"])
             {
                 $error      = ["error_text" => $e->getMessage()];
                 $inputs_val = $_POST;
-                include "App/views/task/create.php";
+                include "App/views/profile/profile_settings.php";
                 exit;
             }
 

@@ -1,0 +1,190 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "dc28440c68b535c55ad8553dda4eebd9",
+    "content-hash": "b269c991498c7eda98b9262d887ea7fe",
+    "packages": [
+        {
+            "name": "abeautifulsite/simpleimage",
+            "version": "2.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/claviska/SimpleImage.git",
+                "reference": "a8fb6f68d12f32e3394a2784c3a8c500bc24cdec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/claviska/SimpleImage/zipball/a8fb6f68d12f32e3394a2784c3a8c500bc24cdec",
+                "reference": "a8fb6f68d12f32e3394a2784c3a8c500bc24cdec",
+                "shasum": ""
+            },
+            "require": {
+                "ext-gd": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "abeautifulsite": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nazar Mokrynskyi",
+                    "email": "nazar@mokrynskyi.com",
+                    "homepage": "http://cleverstyle.org/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Cory LaViska",
+                    "homepage": "http://www.abeautifulsite.net/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP class that simplifies working with images",
+            "time": "2015-10-22 19:13:41"
+        },
+        {
+            "name": "esperecyan/url",
+            "version": "v4.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/esperecyan/url.git",
+                "reference": "eccf6c09500ecdf2ab293b387c8728e66daf7fbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/esperecyan/url/zipball/eccf6c09500ecdf2ab293b387c8728e66daf7fbb",
+                "reference": "eccf6c09500ecdf2ab293b387c8728e66daf7fbb",
+                "shasum": ""
+            },
+            "require": {
+                "esperecyan/webidl": "^1",
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "ext-iconv": "*",
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "ext-pcre": "*",
+                "php": ">=5.4.7"
+            },
+            "require-dev": {
+                "apigen/apigen": "*",
+                "ext-dom": "*",
+                "ext-spl": "*",
+                "phpunit/phpunit": ">=4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "esperecyan\\url\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "100の人",
+                    "homepage": "https://twitter.com/esperecyan",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Makes the algorithms and APIs defined by URL Standard (replaces RFC 3986 and RFC 3987) available on PHP. / URL Standard (RFC 3986、RFC 3987 を置き換える Web 標準仕様) で定義されているアルゴリズム、および API を PHP から利用できるようにします。",
+            "homepage": "https://github.com/esperecyan/url",
+            "keywords": [
+                "RFC 3986",
+                "URLSearchParams",
+                "URLUtils",
+                "W3C",
+                "WHATWG",
+                "Web Standards",
+                "url"
+            ],
+            "time": "2016-04-27 06:41:53"
+        },
+        {
+            "name": "esperecyan/webidl",
+            "version": "v1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/esperecyan/webidl.git",
+                "reference": "fbe18806e6205e826f65ffa7959b686da0fef1be"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/esperecyan/webidl/zipball/fbe18806e6205e826f65ffa7959b686da0fef1be",
+                "reference": "fbe18806e6205e826f65ffa7959b686da0fef1be",
+                "shasum": ""
+            },
+            "require": {
+                "ext-date": "*",
+                "ext-dom": "*",
+                "ext-mbstring": "*",
+                "ext-pcre": "*",
+                "ext-reflection": "*",
+                "ext-spl": "*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "apigen/apigen": "^4.1.2",
+                "ext-gmp": "*",
+                "ext-simplexml": "*",
+                "ext-spl-types": "*",
+                "ext-xml": "*",
+                "php": ">=5.5",
+                "phpunit/phpunit": "^4.8.26"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "esperecyan\\webidl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "100の人",
+                    "homepage": "https://twitter.com/esperecyan",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides the utility class for casting a given value in accordance with Web IDL (Second Edition) type to help with PHP type hinting. / Web IDL 第2版 の型に沿うように、与えられた値をキャストするユーティリティクラスを提供し、PHP のタイプヒンティングを補助します。",
+            "homepage": "https://github.com/esperecyan/webidl",
+            "keywords": [
+                "DOMException",
+                "EvalError",
+                "RangeError",
+                "ReferenceError",
+                "TypeError",
+                "URIError",
+                "W3C"
+            ],
+            "time": "2016-05-23 10:31:40"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
