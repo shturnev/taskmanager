@@ -31,6 +31,22 @@ if($_POST["method_name"])
             }
 
         break;
+        case "edit_pass":
+
+
+            try{
+                $resTask = $Auth->change_password($_POST);
+                header("Location: ".$referer);
+            }
+            catch(Exception $e)
+            {
+                $error      = ["error_text" => $e->getMessage()];
+                $inputs_val = $_POST;
+                include "App/views/profile/profile_settings.php";
+                exit;
+            }
+
+        break;
 
     endswitch;
 }
@@ -44,9 +60,24 @@ if($_GET["method"])
     switch ($_GET["method"]):
         case "settings":
 
+            $profileInfo = $Profile->get(["m" => 1]);
+
             $thisUrl   = $Path->withoutGet();
             $pageTitle = "Настройки профиля";
             include "App/views/profile/profile_settings.php";
+
+        break;
+        case "change_token":
+
+            $Auth->changeToken();
+            header("Location: ".$referer);
+
+        break;
+        case "delete":
+
+            $Profile->delete();
+            $Auth->logout();
+            header("Location: /");
 
         break;
 

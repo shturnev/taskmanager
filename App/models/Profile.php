@@ -12,6 +12,7 @@ use App\models\DB;
 use App\models\TextSecurity;
 use App\models\Path;
 use abeautifulsite\SimpleImage;
+use App\models\ProfileGet;
 
 class Profile
 {
@@ -24,6 +25,12 @@ class Profile
         $this->Path = new Path();
         $this->avatarPath = $this->Path->clear_path()."/resources/FILES";
 
+    }
+
+    public function get($array)
+    {
+        $O = new ProfileGet();
+        return $O->get($array);
     }
 
     public function edit($array)
@@ -70,6 +77,29 @@ class Profile
 
         //response
         return $arr;
+
+    }
+
+    public function delete($user_id = null)
+    {
+        $user_id = (!is_numeric($user_id))? $_COOKIE["user_id"] : $user_id;
+
+        $resItem = $this->DB->get_row("SELECT avatar FROM users WHERE ID = ".$user_id);
+
+        //Удалим старую фотографию
+        if($resItem["avatar"])
+        {
+            if(file_exists($this->avatarPath."/big/".$resItem["avatar"])){ unlink($this->avatarPath."/big/".$resItem["avatar"]); }
+            if(file_exists($this->avatarPath."/small/".$resItem["avatar"])){ unlink($this->avatarPath."/small/".$resItem["avatar"]); }
+        }
+
+        //удалим саму запись
+        $this->DB->delete("users", "ID = ".$user_id, true);
+
+
+
+        //response
+        return true;
 
     }
 

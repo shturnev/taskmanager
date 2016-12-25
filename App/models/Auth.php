@@ -174,6 +174,72 @@ class Auth
     }
 
 
+    /**
+     * Сменить пароль
+     * @param $array
+     * @return bool
+     * @throws \Exception
+     */
+    public function change_password($array)
+    {
+        if(!$array["new_pass1"] and $array["new_pass1"] != $array["new_pass2"])
+        {
+            throw new \Exception("Не верные параметры для нового пароля.");
+        }
+
+        $me = $_COOKIE["user_id"];
+
+        //
+        $DB      = new DB();
+        $email   = $DB->get_row("SELECT email FROM users WHERE ID = ".$me)["email"];
+        $newPass = password_hash($array["new_pass1"], PASSWORD_DEFAULT);
+
+        //обновим пароль
+        $DB->update("users", ["pass" => $newPass], "ID =".$me, true);
+
+
+        //Отправим письмо
+        $PATH = new Path();
+        $body = file_get_contents("App/views/mail/change_password.php");
+        $body = str_replace(["{{new_pass}}"], [$array["new_pass1"]], $body);
+
+
+        $M = new libmail("utf-8");
+        $M->To($email);
+        $M->Subject("Смена пароля");
+        $M->log_on(true);
+        $M->Body($body, "html");
+        $M->Send();
+
+        if(!$M->status_mail["status"])
+        {
+            throw new \Exception($M->status_mail["message"]);
+        }
+
+
+        //response
+        return true;
+
+
+    }
+
+    /**
+     * Снять авторизацию на других устройствах
+     * @return array
+     * @throws \Exception
+     */
+    public function changeToken()
+    {
+        $me         = $_COOKIE["user_id"];
+        $token      = $this->newToken();
+
+        $DB = new DB();
+        $DB->update("users", ["token" => $token], "ID=".$me, true);
+
+        return $this->setAuth($me, $token);
+    }
+
+
     private function newToken()
     {
         return md5(time().rand());

@@ -18,6 +18,16 @@
     <script src="/resources/lumino/js/respond.min.js"></script>
     <![endif]-->
 
+    <style>
+        .forAvatar{
+            display: block;
+            width: 150px;
+            height: 150px;
+            background: no-repeat center / cover;
+            border-radius: 50%;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -52,7 +62,7 @@
                             <div class="col-sm-3">
 
                                 <a href="#">
-                                    <img src="http://lorempixel.com/150/150/people/" class="img-circle">
+                                    <span class="forAvatar" style="background-image:url(<? echo $profileInfo["avatar_big_url"] ?>);"></span>
                                 </a>
                                 <div class="form-group mt10">
                                     <label >Добавить фото</label><input type="file" name="avatar">
@@ -63,11 +73,11 @@
                             <div class="col-sm-9">
                                 <div class="form-group">
                                     <label for="">Ваше имя (nickname)</label>
-                                    <input type="text" name="nickname" class="form-control">
+                                    <input type="text" value="<? echo $profileInfo["nickname"] ?>" name="nickname" class="form-control">
                                 </div>
                                 <div class="form-group">
                                     <label for="">Текст</label>
-                                    <textarea name="text" id="editor1"></textarea>
+                                    <textarea name="text" id="editor1"><? echo $profileInfo["text"] ?></textarea>
                                 </div>
                             </div>
                         </div>
@@ -91,11 +101,11 @@
 
                                 <div class="form-group">
                                     <label for="">Укажите новый пароль</label>
-                                    <input name="new_pass1" class="form-control" type="text">
+                                    <input name="new_pass1" class="form-control" type="password" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Укажите новый пароль (повтор)</label>
-                                    <input name="new_pass2" class="form-control" type="text">
+                                    <input name="new_pass2" class="form-control" type="password" required>
                                 </div>
 
 
@@ -104,8 +114,8 @@
                         </div>
                         <div class="col-sm-5">
                             <div class="list-group">
-                                <a href="#" class="list-group-item">Обновить токен (снять авторизацию на других устройствах)</a>
-                                <a href="#" class="list-group-item list-group-item-danger"><span class="color-red">Удалить аккаунт</span></a>
+                                <a href="/profile/change_token" class="list-group-item">Обновить токен (снять авторизацию на других устройствах)</a>
+                                <a href="/profile/delete" class="list-group-item list-group-item-danger"><span class="color-red">Удалить аккаунт</span></a>
                             </div>
 
                         </div>
