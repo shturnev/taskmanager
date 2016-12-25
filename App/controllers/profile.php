@@ -80,13 +80,45 @@ if($_GET["method"])
             header("Location: /");
 
         break;
+        case is_numeric($_GET["method"]):
+
+            $profileInfo = $Profile->get(["m" => 1, "ID" => $_GET["method"]]);
+            if(!$profileInfo)
+            {
+                $error["error_text"] = "Такого пользователя не найдено";
+                include "App/views/for_error.php";
+                exit;
+            }
+            else
+            {
+
+                $thisUrl   = $Path->withoutGet();
+                $pageTitle = "Информация о профиле ".$profileInfo["nickname"];
+                include "App/views/profile/profile_show.php";
+
+            }
+
+            break;
+
 
     endswitch;
 }
 else
 {
-    $thisUrl   = $Path->withoutGet();
-    $pageTitle = "Настройки профиля";
-    include "App/views/profile/profile_settings.php";
+    $profileInfo = $Profile->get(["m" => 1]);
+    if(!$profileInfo)
+    {
+        $error["error_text"] = "Такого пользователя не найдено";
+        include "App/views/for_error.php";
+        exit;
+    }
+    else
+    {
+
+        $thisUrl   = $Path->withoutGet();
+        $pageTitle = "Информация о профиле ".$profileInfo["nickname"];
+        include "App/views/profile/profile_show.php";
+
+    }
 }
 
