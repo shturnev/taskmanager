@@ -17,6 +17,11 @@ class Invite
         $this->DB = new DB();
     }
 
+    public function get($array)
+    {
+        $O = new InviteGet();
+        return $O->get($array);
+    }
 
     public function create($array)
     {

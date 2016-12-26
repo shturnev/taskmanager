@@ -53,7 +53,7 @@ if($_GET["method"])
 }
 else
 {
-//    $taskItems = $Task->get(["m" => 1, "limit" => 30, "p" => $_GET["p"]]);
+    $resInv    = $Invite->get(["m" => 1, "limit" => 30, "p" => $_GET["p"]]);
     $thisUrl   = $Path->withoutGet();
     $pageTitle = "Приглашения";
     include "App/views/invite/my.php";

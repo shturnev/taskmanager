@@ -76,7 +76,7 @@
     </div><!--/.row-->
 
 
-<!--    --><?// if($taskItems["items"]): ?>
+    <? if($resInv["items"]): ?>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -106,22 +106,37 @@
                         </tr>
                         </thead>
                         <tbody>
-<!--                        --><?// foreach ($taskItems["items"] as $item) { ?>
+                        <?
+                        $statuses = [
+                            0 => ["type" => "default", "text" => "ожидается"],
+                            1 => ["type" => "success", "text" => "принято"],
+                            2 => ["type" => "danger", "text" => "отклонен"],
+                        ];
+                        foreach ($resInv["items"] as $item) {?>
+
                             <tr data-index="0">
-                                <td class=""><? echo date("d.m.Y") ?></td>
-                                <td style=""> <a href="#">sdsdsd@dfdf.ru</a></td>
-                                <td style=""><span class="label label-default">ожидается</span></td>
+                                <td class=""><? echo date("d.m.Y", $item["date"]) ?></td>
+                                <td style="">
+                                    <? if($resInv['users_info'][$item["for_email"]]){
+                                        $u_inf = $resInv['users_info'][$item["for_email"]];
+                                    ?>
+                                        <a href="/profile/<? echo $u_inf["ID"] ?>"><? echo $u_inf["email"] ?></a>
+                                    <? }else{ ?>
+                                        <span><? echo $item["for_email"] ?></span>
+                                    <? } ?>
+                                </td>
+                                <td style=""><span class="label label-<? echo $statuses[$item["status"]]["type"] ?>"><? echo $statuses[$item["status"]]["text"] ?></span></td>
                                 <td class="text-center">
                                     <a title="Скрыть?" href="#<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash"></a>
                                     
                                 </td>
                             </tr>
-<!--                        --><?// } ?>
+                        <? } ?>
                         </tbody>
 
                     </table>
 
-                    <? if($taskItems["stack"]) {
+                    <? if($resInv["stack"]) {
                        $paginationUrl   = $thisUrl."?p=";
                        $stack           = $taskItems["stack"];
 
@@ -142,7 +157,7 @@
         </div>
 
     </div>
-<!--    --><?// endif; ?>
+    <? endif; ?>
 
 </div>	<!--/.main-->
 
