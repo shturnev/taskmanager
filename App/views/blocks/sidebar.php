@@ -25,6 +25,26 @@
                 </li>
             </ul>
         </li>
+        <li class="parent ">
+            <a href="#sub-item-2" data-toggle="collapse">
+                <span><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg></span>
+                Приглашения
+            </a>
+            <ul class="children collapse" id="sub-item-2">
+                <li>
+                    <a class="" href="/invite">
+                        <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg>
+                        Мои
+                    </a>
+                </li>
+                <li>
+                    <a class="" href="#">
+                        <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg>
+                        Для меня
+                    </a>
+                </li>
+            </ul>
+        </li>
 
 
 <!--        <li><a href="widgets.html"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Widgets</a></li>-->

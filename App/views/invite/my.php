@@ -28,8 +28,9 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         <ol class="breadcrumb">
-            <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-            <li class="active">Задачи</li>
+            <li><a href="/"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
+            <li class="active">Приглашения</li>
+            <li class="active">Мои</li>
         </ol>
     </div><!--/.row-->
 
@@ -41,43 +42,46 @@
 
     <div class="row">
         <div class="col-md-12 text-right mb35">
-            <a href="/task/create" class="btn btn-primary btn-lg">Добавить задачу <span class="glyphicon glyphicon-plus-sign"></span></a>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="" method="post" enctype="multipart/form-data" name="myForm" target="_self">
+                        <input type="hidden" name="method_name" value="create"/>
+
+                        <div class="input-group">
+                            <input type="email" name="email" class="form-control" placeholder="Укажите email" required>
+                            <div class="input-group-btn">
+                                <input name="submit" type="submit" value="Создать приглашение" class="btn btn-success"/>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
     </div><!--/.row-->
 
 
-    <? if($taskItems["items"]): ?>
+<!--    --><?// if($taskItems["items"]): ?>
     <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Basic Table</div>
+<!--                <div class="panel-heading">Basic Table</div>-->
                 <div class="panel-body">
 
                     <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover text-center">
                         <thead>
                         <tr class="active">
-                            <th class="text-right">
-                                <div class="th-inner ">ID</div>
+                            <th class="text-center">
+                                <div class="th-inner ">Date</div>
                                 <div class="fht-cell"></div>
                             </th>
-                            <th style="">
-                                <div class="th-inner ">Title</div>
+                            <th class="text-center">
+                                <div class="th-inner ">Email</div>
                                 <div class="fht-cell"></div>
                             </th>
-                            <th style="">
-                                <div class="th-inner ">Date of create</div>
-                                <div class="fht-cell"></div>
-                            </th>
-                            <th style="">
-                                <div class="th-inner ">Date of deadleine</div>
-                                <div class="fht-cell"></div>
-                            </th>
-                            <th style="">
-                                <div class="th-inner ">Date of finished</div>
-                                <div class="fht-cell"></div>
-                            </th>
-                            <th style="">
+                            <th class="text-center">
                                 <div class="th-inner ">Status</div>
                                 <div class="fht-cell"></div>
                             </th>
@@ -88,23 +92,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <? foreach ($taskItems["items"] as $item) { ?>
+<!--                        --><?// foreach ($taskItems["items"] as $item) { ?>
                             <tr data-index="0">
-                                <td class="text-right"><? echo $item["ID"] ?></td>
-                                <td style=""> <a href="#"><? echo $item["title"] ?></a></td>
-                                <td style=""><? echo date("d.m.Y", $item["date_created"]) ?></td>
-                                <td style=""><? echo (!$item["date_deadline"])? "---" : date("d.m.Y", $item["date_deadline"]) ?></td>
-                                <td style=""><? echo (!$item["date_finished"])? "---" : date("d.m.Y", $item["date_finished"]) ?></td>
-                                <td style=""><? echo $item["status"] ?></td>
+                                <td class=""><? echo date("d.m.Y") ?></td>
+                                <td style=""> <a href="#">sdsdsd@dfdf.ru</a></td>
+                                <td style=""><span class="label label-default">ожидается</span></td>
                                 <td class="text-center">
-
-                                    <a href="/task/complete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-ok-circle"></a>
-                                    <a href="/task/edit/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-edit"></a>
-                                    <a href="/task/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash"></a>
+                                    <a title="Скрыть?" href="#<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash"></a>
                                     
                                 </td>
                             </tr>
-                        <? } ?>
+<!--                        --><?// } ?>
                         </tbody>
 
                     </table>
@@ -122,16 +120,15 @@
                     <? } ?>
 
 
+                    </div>
+
+
                 </div>
-
-
             </div>
         </div>
-    </div>
 
     </div>
-    <? endif; ?>
-
+<!--    --><?// endif; ?>
 
 </div>	<!--/.main-->
 

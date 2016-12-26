@@ -53,9 +53,9 @@ if($_GET["method"])
 }
 else
 {
-    $taskItems = $Task->get(["m" => 1, "limit" => 30, "p" => $_GET["p"]]);
+//    $taskItems = $Task->get(["m" => 1, "limit" => 30, "p" => $_GET["p"]]);
     $thisUrl   = $Path->withoutGet();
-    $pageTitle = "Задачи";
-    include "App/views/task/task.php";
+    $pageTitle = "Приглашения";
+    include "App/views/invite/my.php";
 }
 
