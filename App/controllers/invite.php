@@ -4,7 +4,7 @@ if(!$Auth->check_auth()){ header("Location: /"); exit;}
 /*-----------------------------------
 Global
 -----------------------------------*/
-$Task       = new \App\models\Task();
+$Invite     = new \App\models\Invite();
 $referer    = ($_POST["referer"])? $_POST["referer"] : $_SERVER["HTTP_REFERER"];
 
 
@@ -18,16 +18,16 @@ if($_POST["method_name"])
 
 
             try{
-                $resTask = $Task->create($_POST);
-                header("Location: ".$referer);
+                $resInv = $Invite->create($_POST);
+//                header("Location: ".$referer);
 
             }
             catch(Exception $e)
             {
                 $error      = ["error_text" => $e->getMessage()];
                 $inputs_val = $_POST;
-                include "App/views/task/create.php";
-                exit;
+//                include "App/views/task/create.php";
+//                exit;
             }
 
         break;

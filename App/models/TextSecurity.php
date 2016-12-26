@@ -6,7 +6,7 @@ class TextSecurity
 {
 
     public static function is_email($email){
-        return filter_var($email, FILTER_VALIDATE_EMAIL);
+        return filter_var(strtolower($email), FILTER_VALIDATE_EMAIL);
     }
 
     public static function shield_hard($string){

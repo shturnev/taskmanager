@@ -40,6 +40,20 @@
         </div>
     </div><!--/.row-->
 
+
+    <? if($error): ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert bg-danger" role="alert">
+                <svg class="glyph stroked cancel"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#stroked-cancel"></use></svg>
+                <? echo $error["error_text"]; ?>
+            </div>
+        </div>
+    </div>
+    <? endif; ?>
+
+
+
     <div class="row">
         <div class="col-md-12 text-right mb35">
             <div class="panel panel-default">
