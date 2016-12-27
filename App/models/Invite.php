@@ -125,4 +125,34 @@ class Invite
         }
     }
 
+    public function change_status($array)
+    {
+        if(!is_numeric($status = $array["status"]) or !is_numeric($id = $array["ID"]))
+        {
+            throw new \Exception("Не корректные параметры id или status");
+        }
+
+        if($status > 2){ $status = 2; }
+        $me = $_COOKIE["user_id"];
+
+        //сделаем выборку этой записи
+        $sql = "SELECT * FROM invites WHERE ID = ".$id;
+        $resItem = $this->DB->get_row($sql);
+        if(!$resItem){
+            throw new \Exception("Такой записи нет");}
+
+        //ифно про пользвоателя
+        $sql = "SELECT * FROM users WHERE ID = ".$me;
+        $resUser = $this->DB->get_row($sql);
+
+        //есть ли право на delete
+        if($resItem["from_user_id"] != $me and $resItem["for_email"] != $resUser["email"]){
+            throw new \Exception("Не достаточно прав");
+        }
+
+        $this->DB->update("invites", ["status" => $status], "ID = ".$id, true);
+        return true;
+
+    }
+
 }

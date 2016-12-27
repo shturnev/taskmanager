@@ -21,6 +21,7 @@ class ProfileGet
         switch ($array["m"]):
             case 1: $res = $this->method_1($array); break; //Вывод by ID
             case 2: $res = $this->method_2($array); break; //Вывод by email array
+            case 3: $res = $this->method_3($array); break; //Вывод by ID array
 
         endswitch;
 
@@ -56,6 +57,23 @@ class ProfileGet
 
         //делаем выборку из бд
         $sql = "SELECT ID,email,nickname FROM users WHERE email IN ('".implode("','", $email)."')";
+        $resItems = $this->DB->get_rows($sql);
+        if(!$resItems){ return false; }
+
+        foreach ($resItems as $index => $resItem) {
+            if(!$resItem["nickname"]){ $resItems[$index]["nickname"] = explode("@", $resItem["email"])[0]; }
+        }
+
+        return ["items" => $resItems];
+
+    }
+
+    private function method_3($array){
+
+        if(!$IDs = array_filter($array["ID"], function($item){ return is_numeric($item); })){ return false; }
+
+        //делаем выборку из бд
+        $sql = "SELECT ID,email,nickname FROM users WHERE ID IN (".implode(",", $IDs).")";
         $resItems = $this->DB->get_rows($sql);
         if(!$resItems){ return false; }
 

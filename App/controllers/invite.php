@@ -51,12 +51,29 @@ if($_GET["method"])
             catch (Exception $e)
             {
                 $error  = ["error_text" => $e->getMessage()];
-
-                $resInv    = $Invite->get(["m" => 1, "limit" => 30, "p" => $_GET["p"]]);
-                $thisUrl   = $Path->withoutGet();
-                $pageTitle = "Приглашения";
-                include "App/views/invite/my.php";
+                include "App/views/for_error.php";
             }
+
+        break;
+        case "change_status":
+
+            try{
+                $Invite->change_status($_GET);
+                header("Location: ".$referer);
+            }
+            catch (Exception $e)
+            {
+                $error  = ["error_text" => $e->getMessage()];
+                include "App/views/for_error.php";
+            }
+
+        break;
+        case "for_me":
+
+            $resInv    = $Invite->get(["m" => 2, "limit" => 30, "p" => $_GET["p"]]);
+            $thisUrl   = $Path->withoutGet();
+            $pageTitle = "Приглашения для меня";
+            include "App/views/invite/for_me.php";
 
         break;
 
