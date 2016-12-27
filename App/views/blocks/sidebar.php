@@ -29,6 +29,8 @@
             <a href="#sub-item-2" data-toggle="collapse">
                 <span><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg></span>
                 Приглашения
+
+                <? if($Badges["new_invites"]){ ?><span class="badge bg-warning"><? echo $Badges["new_invites"] ?></span><? } ?>
             </a>
             <ul class="children collapse" id="sub-item-2">
                 <li>
@@ -41,6 +43,9 @@
                     <a class="" href="/invite/for_me">
                         <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg>
                         Для меня
+
+                        <? if($Badges["new_invites"]){ ?><span class="badge bg-warning"><? echo $Badges["new_invites"] ?></span><? } ?>
+
                     </a>
                 </li>
             </ul>
