@@ -88,17 +88,34 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <? foreach ($taskItems["items"] as $item) { ?>
+                        <?
+                        $statuses = [
+                            0 => ["type" => "default", "text" => "в работе"],
+                            1 => ["type" => "success", "text" => "выполнено"],
+                            2 => ["type" => "danger", "text" => "провален"],
+                        ];
+
+                        foreach ($taskItems["items"] as $item) { ?>
                             <tr data-index="0">
                                 <td class="text-right"><? echo $item["ID"] ?></td>
                                 <td style=""> <a href="#"><? echo $item["title"] ?></a></td>
                                 <td style=""><? echo date("d.m.Y", $item["date_created"]) ?></td>
                                 <td style=""><? echo (!$item["date_deadline"])? "---" : date("d.m.Y", $item["date_deadline"]) ?></td>
                                 <td style=""><? echo (!$item["date_finished"])? "---" : date("d.m.Y", $item["date_finished"]) ?></td>
-                                <td style=""><? echo $item["status"] ?></td>
+
+
+                                <td style=""><span class="label label-<? echo $statuses[$item["status"]]["type"] ?>"><? echo $statuses[$item["status"]]["text"] ?></span></td>
+
+
                                 <td class="text-center">
 
-                                    <a href="/task/complete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-ok-circle"></a>
+                                    <a title="В процессе?" href="/task/change_status/status/no/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-time"></a>
+                                    <a title="Выполнено?" href="/task/change_status/status/1/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-ok-sign"></a>
+                                    <a title="Провален?" href="/task/change_status/status/2/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-remove-sign"></a>
+
+                                    <span class="ml5 mr5">|</span>
+
+
                                     <a href="/task/edit/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-edit"></a>
                                     <a href="/task/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash"></a>
                                     
