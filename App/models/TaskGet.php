@@ -20,6 +20,7 @@ class TaskGet
     {
         switch ($array["m"]):
             case 1: $res = $this->method_1($array); break; //Вывод всех "моих" записей
+            case 2: $res = $this->method_2($array); break; //Вывод by ID
 
         endswitch;
 
@@ -58,6 +59,34 @@ class TaskGet
 
         //response
         $res = ["items" => $resItems, "stack" => $resNav["stack"]];
+        return $res;
+
+
+    }
+
+    private function method_2($array){
+
+        if(!is_numeric($id = $array["ID"])){
+            throw new \Exception("Не корректный ID");}
+        $me = $_COOKIE["user_id"];
+
+        //сделаем выборку этой записи
+        $sql = "SELECT * FROM task WHERE ID = ".$id." AND (from_user_id = ".$me." OR for_user_id = ".$me.")";
+        $resItem = $this->DB->get_row($sql);
+        if(!$resItem){
+            throw new \Exception("Такой записи нет");}
+
+        //Найдем инфо про пользователей
+        $P = new Profile();
+        $usersInfo = $P->get(["m" => 3, "ID" => [$resItem["from_user_id"], $resItem["for_user_id"]]])["items"];
+        if($usersInfo)
+        {
+            $usersInfo = array_combine(array_column($usersInfo, "ID"), $usersInfo);
+        }
+
+
+        //response
+        $res = ["item" => $resItem, "usersInfo" => $usersInfo];
         return $res;
 
 

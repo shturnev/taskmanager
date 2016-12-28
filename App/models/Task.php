@@ -46,6 +46,43 @@ class Task
 
     }
 
+    public function edit($array)
+    {
+        if(!is_numeric($id = $array["ID"])){
+            throw new \Exception("Не корректный ID");}
+
+        $title          = TextSecurity::shield_hard($array["title"]);
+        $from_user_id   = $_COOKIE["user_id"];
+        $for_user_id    = $array["for_user_id"];
+        $date_deadline  = (!$array["date_deadline"])? 0 : strtotime($array["date_deadline"]);
+        $text           = TextSecurity::shield_medium($array["text"]);
+        $me = $_COOKIE["user_id"];
+
+
+        //проверки
+        if(!$title){ throw new \Exception("Заголовок не может быть пустым");}
+        if(!is_numeric($for_user_id)){ $for_user_id = $from_user_id; }
+
+        //сделаем выборку этой записи
+        $sql = "SELECT * FROM task WHERE ID = ".$id." AND (from_user_id = ".$me." OR for_user_id = ".$me.")";
+        $resItem = $this->DB->get_row($sql);
+        if(!$resItem){
+            throw new \Exception("Не достаточно прав, или не верный ID");}
+
+
+        //Пишем в базу
+        $arr = [
+            "for_user_id"   => $for_user_id,
+            "date_deadline" => $date_deadline,
+            "title"         => $title,
+            "text"          => $text,
+        ];
+
+        $this->DB->update("task", $arr, "ID = ".$id, true);
+        return true;
+
+
+    }
 
     public function change_status($array)
     {
@@ -101,5 +138,29 @@ class Task
         return true;
 
 
+    }
+
+    public function delete($id)
+    {
+        if(!is_numeric($id)){
+            throw new \Exception("Не корректный ID");}
+
+        $me = $_COOKIE["user_id"];
+
+        //сделаем выборку этой записи
+        $sql = "SELECT * FROM task WHERE ID = ".$id." AND (from_user_id = ".$me." OR for_user_id = ".$me.")";
+        $resItem = $this->DB->get_row($sql);
+        if(!$resItem){
+            throw new \Exception("Такой записи нет");}
+
+
+        if($me == $resItem["from_user_id"])
+        {
+            $this->DB->delete("task", "ID = ".$id);
+            return true;
+        }
+
+        $this->DB->update("task", ["deleted" => 1], "ID = ".$id, true);
+        return true;
     }
 }

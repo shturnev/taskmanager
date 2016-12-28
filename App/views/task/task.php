@@ -109,15 +109,15 @@
 
                                 <td class="text-center">
 
-                                    <a title="В процессе?" href="/task/change_status/status/no/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-time"></a>
-                                    <a title="Выполнено?" href="/task/change_status/status/1/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-ok-sign"></a>
-                                    <a title="Провален?" href="/task/change_status/status/2/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-remove-sign"></a>
+                                    <a title="В процессе?" href="/task/change_status/status/no/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-time js-confirm"></a>
+                                    <a title="Выполнено?" href="/task/change_status/status/1/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-ok-sign js-confirm"></a>
+                                    <a title="Провален?" href="/task/change_status/status/2/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-remove-sign js-confirm"></a>
 
                                     <span class="ml5 mr5">|</span>
 
 
                                     <a href="/task/edit/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-edit"></a>
-                                    <a href="/task/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash"></a>
+                                    <a href="/task/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash js-confirm"></a>
                                     
                                 </td>
                             </tr>

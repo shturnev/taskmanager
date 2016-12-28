@@ -127,7 +127,7 @@
                                 </td>
                                 <td style=""><span class="label label-<? echo $statuses[$item["status"]]["type"] ?>"><? echo $statuses[$item["status"]]["text"] ?></span></td>
                                 <td class="text-center">
-                                    <a title="Скрыть?" href="/invite/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash js-delete"></a>
+                                    <a title="Скрыть?" href="/invite/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash js-confirm"></a>
                                     
                                 </td>
                             </tr>

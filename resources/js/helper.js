@@ -5,9 +5,9 @@ $(document).ready(function () {
         , optHref = clear_url + "face/options.php";*/
 
 
-    $(".js-delete").on("click", function () {
-        if(!confirm("Вы уверены?")){ return false; }
 
+    $(".js-confirm").on("click", function () {
+        if(!confirm("Вы уверены?")){ return false; }
     });
 
 

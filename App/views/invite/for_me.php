@@ -108,7 +108,7 @@
 
                                     <span class="ml5 mr5">|</span>
 
-                                    <a title="Скрыть?" href="/invite/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash js-delete"></a>
+                                    <a title="Скрыть?" href="/invite/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash js-confirm"></a>
 
                                 </td>
                             </tr>
