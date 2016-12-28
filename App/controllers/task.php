@@ -68,11 +68,21 @@ if($_GET["method"])
 
         break;
         case "edit":
-            $resTeam        = $Profile->get(["m" => 4]);
-            $resItem        = $Task->get(["m" => 2, "ID" => $_GET["ID"]]);
-            $inputs_val     = $resItem["item"];
-            $pageTitle = "Добавить задачу";
-            include "App/views/task/edit.php";
+
+            try{
+                $resTeam        = $Profile->get(["m" => 4]);
+                $resItem        = $Task->get(["m" => 2, "ID" => $_GET["ID"]]);
+                $inputs_val     = $resItem["item"];
+                $pageTitle = "Добавить задачу";
+                include "App/views/task/edit.php";
+            }
+            catch (Exception $e)
+            {
+                $error  = ["error_text" => $e->getMessage()];
+                include "App/views/for_error.php";
+            }
+
+
 
         break;
         case "change_status":
@@ -108,6 +118,21 @@ if($_GET["method"])
             $pageTitle = "Задачи для меня";
             include "App/views/task/for_me.php";
             break;
+        case is_numeric($_GET["method"]):
+
+            try{
+                $resItem        = $Task->get(["m" => 2, "ID" => $_GET["method"]]);
+                $taskInfo   = $resItem["item"];
+                $usersInfo  = $resItem["usersInfo"];
+                $pageTitle = $taskInfo["title"];
+                include "App/views/task/show.php";
+            }
+            catch (Exception $e)
+            {
+                $error  = ["error_text" => $e->getMessage()];
+                include "App/views/for_error.php";
+            }
+        break;
 
 
     endswitch;

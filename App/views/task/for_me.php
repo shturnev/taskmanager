@@ -93,7 +93,7 @@
                         foreach ($taskItems["items"] as $item) { ?>
                             <tr data-index="0">
                                 <td class="text-right"><? echo $item["ID"] ?></td>
-                                <td style=""> <a href="#"><? echo $item["title"] ?></a></td>
+                                <td style=""> <a href="/task/<? echo $item["ID"] ?>"><? echo $item["title"] ?></a></td>
                                 <td style=""><? echo date("d.m.Y", $item["date_created"]) ?></td>
                                 <td style=""><? echo (!$item["date_deadline"])? "---" : date("d.m.Y", $item["date_deadline"]) ?></td>
                                 <td style=""><? echo (!$item["date_finished"])? "---" : date("d.m.Y", $item["date_finished"]) ?></td>
