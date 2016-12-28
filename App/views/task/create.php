@@ -67,15 +67,17 @@
                             <input name="title" value="<? echo $inputs_val["title"] ?>" class="form-control" required>
                         </div>
 
+                        <? if($resTeam["items"]): ?>
                         <div class="form-group">
                             <label>Для кого?</label>
-                            <select name="for_user_id" class="form-control" disabled>
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                                <option>Option 4</option>
+                            <select name="for_user_id" class="form-control">
+                                <option>Для себя</option>
+                                <? foreach ($resTeam["items"] as $item) {?>
+                                    <option value="<? echo $item["ID"] ?>"><? echo $item["email"] ?></option>
+                                <? } ?>
                             </select>
                         </div>
+                        <? endif; ?>
 
                         <div class="form-group">
                             <label>Дата когда задача должна быть выполнена (Deadline)</label>
