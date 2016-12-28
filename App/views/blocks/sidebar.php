@@ -9,6 +9,8 @@
         <li class="parent ">
             <a href="#sub-item-1" data-toggle="collapse">
                 <span><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></span> Задачи
+                <? if($Badges["new_tasks"]){ ?><span class="badge bg-warning"><? echo $Badges["new_tasks"] ?></span><? } ?>
+
             </a>
             <ul class="children collapse" id="sub-item-1">
                 <li>
@@ -18,9 +20,10 @@
                     </a>
                 </li>
                 <li>
-                    <a class="" href="#">
+                    <a class="" href="/task/for_me">
                         <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg>
                         Для меня
+                        <? if($Badges["new_tasks"]){ ?><span class="badge bg-warning"><? echo $Badges["new_tasks"] ?></span><? } ?>
                     </a>
                 </li>
             </ul>

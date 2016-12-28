@@ -29,19 +29,14 @@
     <div class="row">
         <ol class="breadcrumb">
             <li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
-            <li class="active">Задачи</li>
+            <li><a href="/task">Задачи</a></li>
+            <li class="active">Для меня</li>
         </ol>
     </div><!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header"><? echo $pageTitle ?></h1>
-        </div>
-    </div><!--/.row-->
-
-    <div class="row">
-        <div class="col-md-12 text-right mb35">
-            <a href="/task/create" class="btn btn-primary btn-lg">Добавить задачу <span class="glyphicon glyphicon-plus-sign"></span></a>
         </div>
     </div><!--/.row-->
 
@@ -115,8 +110,6 @@
 
                                     <span class="ml5 mr5">|</span>
 
-
-                                    <a href="/task/edit/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-edit"></a>
                                     <a href="/task/delete/ID/<? echo $item["ID"] ?>" class="ml5 glyphicon glyphicon-trash js-confirm"></a>
                                     
                                 </td>
