@@ -62,6 +62,8 @@ if($_GET["method"])
 {
     switch ($_GET["method"]):
         case "create":
+            $sideBar_page   = ["lvl1" => "task"];
+
             $resTeam   = $Profile->get(["m" => 4]);
             $pageTitle = "Добавить задачу";
             include "App/views/task/create.php";
@@ -70,6 +72,7 @@ if($_GET["method"])
         case "edit":
 
             try{
+                $sideBar_page   = ["lvl1" => "task"];
                 $resTeam        = $Profile->get(["m" => 4]);
                 $resItem        = $Task->get(["m" => 2, "ID" => $_GET["ID"]]);
                 $inputs_val     = $resItem["item"];
@@ -113,6 +116,7 @@ if($_GET["method"])
             break;
         case "for_me":
 
+            $sideBar_page   = ["lvl1" => "task", "lvl2" => "for_me"];
             $taskItems = $Task->get(["m" => 3, "limit" => 30, "p" => $_GET["p"], "sort_by" => @$_GET["sort_by"]]);
             $thisUrl   = $Path->withoutGet();
             $pageTitle = "Задачи для меня";
@@ -121,6 +125,7 @@ if($_GET["method"])
         case is_numeric($_GET["method"]):
 
             try{
+                $sideBar_page   = ["lvl1" => "task"];
                 $resItem        = $Task->get(["m" => 2, "ID" => $_GET["method"]]);
                 $taskInfo   = $resItem["item"];
                 $usersInfo  = $resItem["usersInfo"];
@@ -139,9 +144,10 @@ if($_GET["method"])
 }
 else
 {
-    $taskItems = $Task->get(["m" => 1, "limit" => 30, "p" => @$_GET["p"], "sort_by" => @$_GET["sort_by"]]);
-    $thisUrl   = $Path->withoutGet();
-    $pageTitle = "Задачи";
+    $sideBar_page   = ["lvl1" => "task", "lvl2" => "my"];
+    $taskItems      = $Task->get(["m" => 1, "limit" => 30, "p" => @$_GET["p"], "sort_by" => @$_GET["sort_by"]]);
+    $thisUrl        = $Path->withoutGet();
+    $pageTitle      = "Задачи";
     include "App/views/task/task.php";
 }
 

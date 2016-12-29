@@ -5,22 +5,50 @@
         </div>
     </form>
     <ul class="nav menu">
-        <li class="active"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-        <li class="parent ">
+
+        <?
+        if($sideBar_page["lvl1"] == "dashboard"){
+            $parent_active = "active";
+            $in = ($sideBar_page["lvl2"])? "in" : null;
+        }
+        else
+        {
+            $parent_active = null;
+            $in = null;
+        }
+        ?>
+        <li class="<? echo $parent_active ?>"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+
+        <?
+           if($sideBar_page["lvl1"] == "task"){
+               $parent_active = "active";
+               $in = ($sideBar_page["lvl2"])? "in" : null;
+           }
+           else
+           {
+               $parent_active = null;
+               $in = null;
+           }
+        ?>
+
+        <li class="parent <? echo $parent_active ?>">
             <a href="#sub-item-1" data-toggle="collapse">
                 <span><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg></span> Задачи
                 <? if($Badges["new_tasks"]){ ?><span class="badge bg-warning"><? echo $Badges["new_tasks"] ?></span><? } ?>
 
             </a>
-            <ul class="children collapse" id="sub-item-1">
+            <ul class="children collapse <? echo $in ?>" id="sub-item-1">
+
                 <li>
-                    <a class="" href="/task">
+                    <? $children_active = ($in && $sideBar_page["lvl2"] == "my")? "active" : null; ?>
+                    <a class="<? echo $children_active ?>" href="/task">
                         <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg>
                         Мои
                     </a>
                 </li>
                 <li>
-                    <a class="" href="/task/for_me">
+                    <? $children_active = ($in && $sideBar_page["lvl2"] == "for_me")? "active" : null; ?>
+                    <a class="<? echo $children_active ?>" href="/task/for_me">
                         <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg>
                         Для меня
                         <? if($Badges["new_tasks"]){ ?><span class="badge bg-warning"><? echo $Badges["new_tasks"] ?></span><? } ?>
@@ -28,22 +56,38 @@
                 </li>
             </ul>
         </li>
-        <li class="parent ">
+
+
+
+        <?
+        if($sideBar_page["lvl1"] == "invite"){
+            $parent_active = "active";
+            $in = ($sideBar_page["lvl2"])? "in" : null;
+        }
+        else
+        {
+            $parent_active = null;
+            $in = null;
+        }
+        ?>
+        <li class="parent <? echo $parent_active ?>">
             <a href="#sub-item-2" data-toggle="collapse">
                 <span><svg class="glyph stroked male user "><use xlink:href="#stroked-male-user"/></svg></span>
                 Приглашения
 
                 <? if($Badges["new_invites"]){ ?><span class="badge bg-warning"><? echo $Badges["new_invites"] ?></span><? } ?>
             </a>
-            <ul class="children collapse" id="sub-item-2">
+            <ul class="children collapse <? echo $in ?>" id="sub-item-2">
                 <li>
-                    <a class="" href="/invite">
+                    <? $children_active = ($in && $sideBar_page["lvl2"] == "my")? "active" : null; ?>
+                    <a class="<? echo $children_active ?>" href="/invite">
                         <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg>
                         Мои
                     </a>
                 </li>
                 <li>
-                    <a class="" href="/invite/for_me">
+                    <? $children_active = ($in && $sideBar_page["lvl2"] == "for_me")? "active" : null; ?>
+                    <a class="<? echo $children_active ?>" href="/invite/for_me">
                         <svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg>
                         Для меня
 

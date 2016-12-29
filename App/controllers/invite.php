@@ -69,7 +69,7 @@ if($_GET["method"])
 
         break;
         case "for_me":
-
+            $sideBar_page   = ["lvl1" => "invite", "lvl2" => "for_me"];
             $resInv    = $Invite->get(["m" => 2, "limit" => 30, "p" => $_GET["p"]]);
             $thisUrl   = $Path->withoutGet();
             $pageTitle = "Приглашения для меня";
@@ -81,6 +81,7 @@ if($_GET["method"])
 }
 else
 {
+    $sideBar_page   = ["lvl1" => "invite", "lvl2" => "my"];
     $resInv    = $Invite->get(["m" => 1, "limit" => 30, "p" => $_GET["p"]]);
     $thisUrl   = $Path->withoutGet();
     $pageTitle = "Приглашения";
