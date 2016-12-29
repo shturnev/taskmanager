@@ -113,7 +113,7 @@ if($_GET["method"])
             break;
         case "for_me":
 
-            $taskItems = $Task->get(["m" => 3, "limit" => 30, "p" => $_GET["p"]]);
+            $taskItems = $Task->get(["m" => 3, "limit" => 30, "p" => $_GET["p"], "sort_by" => @$_GET["sort_by"]]);
             $thisUrl   = $Path->withoutGet();
             $pageTitle = "Задачи для меня";
             include "App/views/task/for_me.php";
@@ -139,7 +139,7 @@ if($_GET["method"])
 }
 else
 {
-    $taskItems = $Task->get(["m" => 1, "limit" => 30, "p" => $_GET["p"]]);
+    $taskItems = $Task->get(["m" => 1, "limit" => 30, "p" => @$_GET["p"], "sort_by" => @$_GET["sort_by"]]);
     $thisUrl   = $Path->withoutGet();
     $pageTitle = "Задачи";
     include "App/views/task/task.php";
