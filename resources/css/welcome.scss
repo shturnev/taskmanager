@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+html,body{
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+.wr{
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &>video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.5,1.5);
+    //z-index: -1;
+  }
+
+  &>.content{
+    position: absolute;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%; height: 100%;
+    background: rgba(black, 0.6);
+    z-index: 1;
+
+    h1{
+      text-align: center;
+      color: white;
+      flex-basis: 100%;
+    }
+    
+  }
+}
+
+

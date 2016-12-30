@@ -2,7 +2,8 @@
 
 if(!$Auth->check_auth())
 {
-    include "App/views/tamplate.php";
+    $pageTitle      = "Join to the best Task Manager";
+    include "App/views/welcome.php";
 }
 else
 {
