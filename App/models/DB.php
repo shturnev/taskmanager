@@ -78,11 +78,13 @@ class DB
             throw new \Exception($this->db_connect->error);
         }
 
+        $insert_id = $this->db_connect->insert_id;
+
         if($close){
             $this->disconnect();
         }
 
-        return $this;
+        return $insert_id;
     }
 
 
@@ -204,6 +206,32 @@ class DB
 
     }
 
+    public function duplicate_update($tableName, $arrValues, $close = false)
+    {
+        $this->connect();
+
+        $cols = array_keys($arrValues);
+        $forSql = [];
+        foreach ($arrValues as $key => $value) {
+            $forSql[] = $key."='".$value."'";
+        }
+
+        $sql = "INSERT INTO ".$tableName." (".implode(",", $cols).") VALUES ('".implode("','", $arrValues)."')
+                ON DUPLICATE KEY UPDATE ".implode(",", $forSql);
+
+        $resQuery = $this->db_connect->query($sql);
+        if(!$resQuery){
+            throw new \Exception($this->db_connect->error);
+        }
+
+        $insert_id = $this->db_connect->insert_id;
+
+        if($close){
+            $this->disconnect();
+        }
+
+        return $insert_id;
+    }
 
 
 
