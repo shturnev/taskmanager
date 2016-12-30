@@ -22,6 +22,7 @@ class TaskGet
             case 1: $res = $this->method_1($array); break; //Вывод всех "моих" записей
             case 2: $res = $this->method_2($array); break; //Вывод by ID
             case 3: $res = $this->method_3($array); break; //Вывод всех "для меня" записей
+            case 4: $res = $this->method_4($array); break; //Вывод подсчет задач "для меня" в разных статусах
 
         endswitch;
 
@@ -105,12 +106,14 @@ class TaskGet
         $sortes  = ["ID", "date_created", "date_deadline", "date_finished", "status", "title"];
         $sort_by = (!in_array($array["sort_by"], $sortes))? "ID" : $array["sort_by"];
 
-
+        $status  = (isset($array["status"]) and is_numeric($array["status"]))? $array["status"]: null;
+        if($status > 2){ $status = 2; }
+        if(!is_null($status)){ $status = " AND status = ".$status; }
 
         //проверки
 
         //узнаем сколько всего у нас таких записей?
-        $sql = "SELECT COUNT(*) AS n FROM task WHERE deleted = 0 AND for_user_id = ".$me;
+        $sql = "SELECT COUNT(*) AS n FROM task WHERE deleted = 0 AND for_user_id = ".$me. $status;
         $resCount = $this->DB->get_row($sql)["n"];
         if(!$resCount){ return false; }
 
@@ -125,13 +128,28 @@ class TaskGet
         $resNav = Counter::get_nav($arr);
 
         //Делаем быборку записей
-        $sql = "SELECT * FROM task WHERE deleted = 0 AND for_user_id = ".$me."  ORDER BY ".$sort_by." DESC LIMIT ".$resNav["start"].",".$resNav["limit"];
+        $sql = "SELECT * FROM task WHERE deleted = 0 AND for_user_id = ".$me. $status."  ORDER BY ".$sort_by." DESC LIMIT ".$resNav["start"].",".$resNav["limit"];
         $resItems = $this->DB->get_rows($sql, true);
 
         //response
         $res = ["items" => $resItems, "stack" => $resNav["stack"]];
         return $res;
 
+
+    }
+
+    private function method_4($array = null){
+
+        $me = $_COOKIE["user_id"];
+
+        for ($i = 0; $i < 3; $i++):
+            $sql[] = "(SELECT COUNT(*) FROM task WHERE deleted = 0 AND for_user_id = ".$me. " AND status = ". $i .") AS status_".$i;
+        endfor;
+
+        $sql = "SELECT ".implode(",", $sql);
+        $resCount = $this->DB->get_row($sql);
+
+        return $resCount;
 
     }
 

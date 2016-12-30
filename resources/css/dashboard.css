@@ -1,0 +1,18 @@
+.simple-list {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .simple-list li {
+    padding: 5px; }
+    .simple-list li:hover {
+      background: #f6f6f6; }
+    .simple-list li a {
+      font-size: 15px; }
+    .simple-list li .avatar {
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: no-repeat center / cover;
+      border-radius: 50%; }
+
+/*# sourceMappingURL=dashboard.css.map */
