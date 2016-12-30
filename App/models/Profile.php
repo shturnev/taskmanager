@@ -47,12 +47,7 @@ class Profile
         //Если есть файл
         if($_FILES[$inputName]["tmp_name"])
         {
-            $this->checkDir();
-            $avatarName = md5(time().rand()).".jpg";
-
-            $img = new SimpleImage($_FILES[$inputName]["tmp_name"]);
-            $img->best_fit(600, 600)->save($this->avatarPath."/big/".$avatarName);
-            $img->best_fit(200, 200)->save($this->avatarPath."/small/".$avatarName);
+            $avatarName = $this->upload_photo($_FILES[$inputName]["tmp_name"]);
 
             //Удалим старую фотографию
             if($resItem["avatar"])
@@ -103,10 +98,21 @@ class Profile
 
     }
 
-
     private function checkDir()
     {
         if(!is_dir($this->avatarPath."/big")){ mkdir($this->avatarPath."/big", "0777", true); }
         if(!is_dir($this->avatarPath."/small")){ mkdir($this->avatarPath."/small", "0777", true); }
+    }
+
+    public function upload_photo($file)
+    {
+        $this->checkDir();
+        $avatarName = md5(time().rand()).".jpg";
+
+        $img = new SimpleImage($file);
+        $img->best_fit(600, 600)->save($this->avatarPath."/big/".$avatarName);
+        $img->best_fit(200, 200)->save($this->avatarPath."/small/".$avatarName);
+
+        return $avatarName;
     }
 }

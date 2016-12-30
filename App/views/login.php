@@ -37,16 +37,11 @@
                 <div class="social-box">
                     <div class="row mg-btm">
                         <div class="col-md-12">
-                            <a href="#" class="btn btn-primary btn-block">
-                                <i class="icon-facebook"></i>    Login with Facebook
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="#" class="btn btn-info btn-block" >
-                                <i class="icon-twitter"></i>    Login with Twitter
-                            </a>
+
+                            <span class="text-center">
+                                <div id="uLogin_7f590f1f" data-uloginid="7f590f1f"></div>
+                            </span>
+
                         </div>
                     </div>
                 </div>
@@ -79,5 +74,6 @@
 
 
 <? require_once "App/views/blocks/scripts.php"; ?>
+<script src="//ulogin.ru/js/ulogin.js"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@
             $in = null;
         }
         ?>
-        <li class="<? echo $parent_active ?>"><a href="index.html"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+        <li class="<? echo $parent_active ?>"><a href="/"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
 
         <?
            if($sideBar_page["lvl1"] == "task"){
