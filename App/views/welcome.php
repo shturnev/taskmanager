@@ -7,7 +7,7 @@
     <? require_once "App/views/blocks/metaHeaders.php"; ?>
     
     <!--custom css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
     <link rel="stylesheet" href="/resources/css/welcome.css">
 
 </head>
@@ -17,7 +17,7 @@
     <video loop muted autoplay poster="/resources/FILES/video/office.jpg" >
         <source src="/resources/FILES/video/office.mp4" type="video/mp4">
     </video>
-    <div class="for-content">
+ <div class="for-content">
         <div class="content">
             <h1 class="mb35">Welcome To the best Task Manager!</h1>
             <label for="forLoginCont"><span class="btn btn-lg btn-info">Join To Us</span></label>
@@ -55,8 +55,6 @@
         </div>
     </div>
 </div>
-
-
 
 <? require_once "App/views/blocks/scripts.php"; ?>
 <script src="//ulogin.ru/js/ulogin.js"></script>
