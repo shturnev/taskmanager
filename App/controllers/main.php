@@ -2,7 +2,8 @@
 
 if(!$Auth->check_auth())
 {
-    include "App/views/tamplate.php";
+    $pageTitle      = "Welcome";
+    include "App/views/welcome.php";
 }
 else
 {

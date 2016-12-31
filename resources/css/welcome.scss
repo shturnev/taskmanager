@@ -1,0 +1,107 @@
+@charset "UTF-8";
+
+
+html.body{
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  min-height: 100%;
+}
+
+.wr{
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  video{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: scale(2, 2);
+
+    @media (min-device-aspect-ratio: 3/4) {
+      transform: scale(2, 2);
+    }
+  }
+
+  .for-content{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: rgba(black, 0.6);
+
+    &>.content{
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+
+  }
+
+  #forLoginCont:checked{
+    &+*{
+      display: flex;
+    }
+  }
+  #login-cont{
+    position: absolute;
+    overflow-y: auto;
+    background: rgba(black, 0.9);
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    &>.close{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: right;
+      
+      color: whitesmoke;
+    }
+    &>.form-cont{
+      position: relative;
+      padding: 20px;
+      background: white;
+      text-align: center;
+      min-width: 300px;
+
+      h3{
+        text-transform: uppercase;
+      }
+      .or{
+        margin: 35px 0;
+        display: flex;
+        align-items: center;
+
+        &:before{
+          content: '';
+          height: 1px;
+          background: silver;
+          flex: 1 0 0;
+        }
+        &:after{
+          content: '';
+          height: 1px;
+          background: silver;
+          flex: 1 0 0;
+        }
+        span{
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+
+}
