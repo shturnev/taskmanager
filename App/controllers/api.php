@@ -5,6 +5,7 @@
 -----------------------------------*/
 if($_GET["method"] == "social" and $_POST["token"])
 {
+
     try{
         $AuthSocial = new \App\models\AuthSocial();
         $AuthSocial->enter($_POST);

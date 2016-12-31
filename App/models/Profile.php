@@ -23,8 +23,7 @@ class Profile
     {
         $this->DB = new DB();
         $this->Path = new Path();
-        $this->avatarPath = $this->Path->clear_path()."/resources/FILES";
-
+        $this->avatarPath = $this->Path->clear_path().DIRECTORY_SEPARATOR."resources".DIRECTORY_SEPARATOR."FILES";
     }
 
     public function get($array)
