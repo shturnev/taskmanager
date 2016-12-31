@@ -9,7 +9,8 @@ class Path{
      * @return string
      */
     public function clear_path(){
-        return strstr(__DIR__, "\\".__NAMESPACE__, true);
+        $DS = DIRECTORY_SEPARATOR;
+        return strstr(__DIR__, $DS."App".$DS."models", true);
     }
 
     /**
