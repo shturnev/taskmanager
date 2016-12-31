@@ -1,32 +1,79 @@
-html, body {
+html.body {
   padding: 0;
   margin: 0;
   height: 100%;
   min-height: 100%; }
 
 .wr {
-  height: 100%;
-  position: relative;
-  overflow: hidden; }
-  .wr > video {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 100%; }
+  .wr video {
     position: absolute;
     width: 100%;
     height: 100%;
-    transform: scale(1.5, 1.5); }
-  .wr > .content {
+    transform: scale(2, 2); }
+    @media (min-device-aspect-ratio: 3 / 4) {
+      .wr video {
+        transform: scale(2, 2); } }
+  .wr .for-content {
     position: absolute;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    align-content: center;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1; }
-    .wr > .content h1 {
+    background: rgba(0, 0, 0, 0.6); }
+    .wr .for-content > .content {
+      position: relative;
       text-align: center;
-      color: white;
-      flex-basis: 100%; }
+      color: white; }
+  .wr #forLoginCont:checked + * {
+    display: flex; }
+  .wr #login-cont {
+    position: absolute;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.9);
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; }
+    .wr #login-cont > .close {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: right;
+      color: whitesmoke; }
+    .wr #login-cont > .form-cont {
+      position: relative;
+      padding: 20px;
+      background: white;
+      text-align: center;
+      min-width: 300px; }
+      .wr #login-cont > .form-cont h3 {
+        text-transform: uppercase; }
+      .wr #login-cont > .form-cont .or {
+        margin: 35px 0;
+        display: flex;
+        align-items: center; }
+        .wr #login-cont > .form-cont .or:before {
+          content: '';
+          height: 1px;
+          background: silver;
+          flex: 1 0 0; }
+        .wr #login-cont > .form-cont .or:after {
+          content: '';
+          height: 1px;
+          background: silver;
+          flex: 1 0 0; }
+        .wr #login-cont > .form-cont .or span {
+          margin: 0 10px; }
 
 /*# sourceMappingURL=welcome.css.map */

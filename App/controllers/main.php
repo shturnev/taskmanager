@@ -2,7 +2,7 @@
 
 if(!$Auth->check_auth())
 {
-    $pageTitle      = "Join to the best Task Manager";
+    $pageTitle      = "Welcome";
     include "App/views/welcome.php";
 }
 else
