@@ -45,7 +45,7 @@ class TaskGet
 
         //узнаем сколько всего у нас таких записей?
         $sql = "SELECT COUNT(*) AS n FROM task WHERE from_user_id = ".$me;
-        $resCount = $this->DB->get_row($sql)["n"];
+        $resCount = $this->DB->get_row($sql, true)["n"];
         if(!$resCount){ return false; }
 
         //Counter
@@ -77,7 +77,7 @@ class TaskGet
 
         //сделаем выборку этой записи
         $sql = "SELECT * FROM task WHERE ID = ".$id." AND (from_user_id = ".$me." OR for_user_id = ".$me.")";
-        $resItem = $this->DB->get_row($sql);
+        $resItem = $this->DB->get_row($sql, true);
         if(!$resItem){
             throw new \Exception("Такой записи нет");}
 
@@ -147,7 +147,7 @@ class TaskGet
         endfor;
 
         $sql = "SELECT ".implode(",", $sql);
-        $resCount = $this->DB->get_row($sql);
+        $resCount = $this->DB->get_row($sql, true);
 
         return $resCount;
 
